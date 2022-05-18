@@ -1,0 +1,907 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.2
+-- Dumped by pg_dump version 14.1
+
+-- Started on 2022-04-20 19:02:25
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+DROP DATABASE "OSLERDB";
+--
+-- TOC entry 3447 (class 1262 OID 16940)
+-- Name: OSLERDB; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE "OSLERDB" WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'Portuguese_Portugal.1252';
+
+
+ALTER DATABASE "OSLERDB" OWNER TO postgres;
+
+\connect "OSLERDB"
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 5 (class 2615 OID 17121)
+-- Name: osler; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA osler;
+
+
+ALTER SCHEMA osler OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 215 (class 1259 OID 17150)
+-- Name: cortriagem; Type: TABLE; Schema: osler; Owner: postgres
+--
+
+CREATE TABLE osler.cortriagem (
+    idcortriagem bigint NOT NULL,
+    descricao character varying(50) NOT NULL,
+    codigocorhex character varying(50) NOT NULL,
+    criadopor bigint,
+    criadoem timestamp without time zone,
+    modificadopor bigint,
+    modificadoem timestamp without time zone
+);
+
+
+ALTER TABLE osler.cortriagem OWNER TO postgres;
+
+--
+-- TOC entry 212 (class 1259 OID 17134)
+-- Name: episodio; Type: TABLE; Schema: osler; Owner: postgres
+--
+
+CREATE TABLE osler.episodio (
+    idepisodio bigint NOT NULL,
+    idcortriagem bigint NOT NULL,
+    idnacionalidade bigint NOT NULL,
+    ididioma bigint NOT NULL,
+    idsns character varying(20),
+    estado smallint DEFAULT 0 NOT NULL,
+    dataaberto timestamp without time zone NOT NULL,
+    datafechado timestamp without time zone,
+    criadopor bigint,
+    criadoem timestamp without time zone,
+    modificadopor bigint,
+    modificadoem timestamp without time zone,
+    descricao character varying(100),
+    codepisodiotxt character varying(30) NOT NULL,
+    dtnascimento date NOT NULL,
+    pin4 smallint NOT NULL,
+    estadotxt character varying(200)
+);
+
+
+ALTER TABLE osler.episodio OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 17185)
+-- Name: episodiohistlocal; Type: TABLE; Schema: osler; Owner: postgres
+--
+
+CREATE TABLE osler.episodiohistlocal (
+    idhistoricolocal bigint NOT NULL,
+    idlocal bigint NOT NULL,
+    idepisodio bigint NOT NULL,
+    datahora timestamp without time zone NOT NULL,
+    criadopor bigint,
+    criadoem timestamp without time zone,
+    modificadopor bigint,
+    modificadoem timestamp without time zone
+);
+
+
+ALTER TABLE osler.episodiohistlocal OWNER TO postgres;
+
+--
+-- TOC entry 222 (class 1259 OID 17190)
+-- Name: episodionotificacao; Type: TABLE; Schema: osler; Owner: postgres
+--
+
+CREATE TABLE osler.episodionotificacao (
+    idnotificacao bigint NOT NULL,
+    idepisodio bigint NOT NULL,
+    datahora timestamp without time zone NOT NULL,
+    mensagem character varying(255) NOT NULL,
+    datahoraleitura timestamp without time zone,
+    criadopor bigint,
+    criadoem timestamp without time zone,
+    modificadopor bigint,
+    modificadoem timestamp without time zone
+);
+
+
+ALTER TABLE osler.episodionotificacao OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 17160)
+-- Name: episodioquestionario; Type: TABLE; Schema: osler; Owner: postgres
+--
+
+CREATE TABLE osler.episodioquestionario (
+    idepisodioquestionario bigint NOT NULL,
+    idepisodio bigint NOT NULL,
+    idquestionario bigint NOT NULL,
+    sequenciaquestionario smallint DEFAULT 1 NOT NULL,
+    criadopor bigint,
+    criadoem timestamp without time zone,
+    modificadopor bigint,
+    modificadoem timestamp without time zone
+);
+
+
+ALTER TABLE osler.episodioquestionario OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 17178)
+-- Name: episodioquestresposta; Type: TABLE; Schema: osler; Owner: postgres
+--
+
+CREATE TABLE osler.episodioquestresposta (
+    idepisodioquestionario bigint NOT NULL,
+    sequenciaresposta smallint DEFAULT 1 NOT NULL,
+    idquestionario bigint NOT NULL,
+    idpergunta bigint NOT NULL,
+    resposta character varying(255) NOT NULL,
+    ativo boolean DEFAULT true NOT NULL,
+    criadopor bigint,
+    criadoem timestamp without time zone,
+    modificadopor bigint,
+    modificadoem timestamp without time zone
+);
+
+
+ALTER TABLE osler.episodioquestresposta OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 17195)
+-- Name: episodioregistodados; Type: TABLE; Schema: osler; Owner: postgres
+--
+
+CREATE TABLE osler.episodioregistodados (
+    idregistodados bigint NOT NULL,
+    idepisodio bigint NOT NULL,
+    idtipoleitura bigint NOT NULL,
+    datahora timestamp without time zone NOT NULL,
+    valor character varying(50) NOT NULL,
+    criadopor bigint,
+    criadoem timestamp without time zone,
+    modificadopor bigint,
+    modificadoem timestamp without time zone
+);
+
+
+ALTER TABLE osler.episodioregistodados OWNER TO postgres;
+
+--
+-- TOC entry 211 (class 1259 OID 17129)
+-- Name: idioma; Type: TABLE; Schema: osler; Owner: postgres
+--
+
+CREATE TABLE osler.idioma (
+    ididioma bigint NOT NULL,
+    descricao character varying(100) NOT NULL,
+    criadopor bigint,
+    criadoem timestamp without time zone,
+    modificadopor bigint,
+    modificadoem timestamp without time zone
+);
+
+
+ALTER TABLE osler.idioma OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 17303)
+-- Name: itemfluxomanchester; Type: TABLE; Schema: osler; Owner: postgres
+--
+
+CREATE TABLE osler.itemfluxomanchester (
+    iditemfluxomanchester bigint NOT NULL,
+    idcortriagem bigint NOT NULL,
+    descricao character varying(200) NOT NULL,
+    criadopor bigint,
+    criadoem timestamp without time zone,
+    modificadopor bigint,
+    modificadoem timestamp without time zone
+);
+
+
+ALTER TABLE osler.itemfluxomanchester OWNER TO postgres;
+
+--
+-- TOC entry 213 (class 1259 OID 17140)
+-- Name: local; Type: TABLE; Schema: osler; Owner: postgres
+--
+
+CREATE TABLE osler.local (
+    idlocal bigint NOT NULL,
+    descricao character varying(255) NOT NULL,
+    criadopor bigint,
+    criadoem timestamp without time zone,
+    modificadopor bigint,
+    modificadoem timestamp without time zone
+);
+
+
+ALTER TABLE osler.local OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 17172)
+-- Name: loginregisto; Type: TABLE; Schema: osler; Owner: postgres
+--
+
+CREATE TABLE osler.loginregisto (
+    idlogin bigint NOT NULL,
+    idutilizador bigint NOT NULL,
+    idepisodio bigint NOT NULL,
+    datahora timestamp without time zone NOT NULL,
+    validadetoken timestamp without time zone NOT NULL,
+    ativo boolean DEFAULT true NOT NULL,
+    infodispositivo character varying(50),
+    criadopor bigint,
+    criadoem timestamp without time zone,
+    modificadopor bigint,
+    modificadoem timestamp without time zone,
+    tokenpayload character varying(250) NOT NULL
+);
+
+
+ALTER TABLE osler.loginregisto OWNER TO postgres;
+
+--
+-- TOC entry 214 (class 1259 OID 17145)
+-- Name: nacionalidade; Type: TABLE; Schema: osler; Owner: postgres
+--
+
+CREATE TABLE osler.nacionalidade (
+    idnacionalidade bigint NOT NULL,
+    ididioma bigint NOT NULL,
+    descricao character varying(100) NOT NULL,
+    criadopor bigint,
+    criadoem timestamp without time zone,
+    modificadopor bigint,
+    modificadoem timestamp without time zone
+);
+
+
+ALTER TABLE osler.nacionalidade OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 17166)
+-- Name: pergunta; Type: TABLE; Schema: osler; Owner: postgres
+--
+
+CREATE TABLE osler.pergunta (
+    idpergunta bigint NOT NULL,
+    idquestionario bigint NOT NULL,
+    sequenciapergunta smallint DEFAULT 1 NOT NULL,
+    textopergunta character varying(255) NOT NULL,
+    criadopor bigint,
+    criadoem timestamp without time zone,
+    modificadopor bigint,
+    modificadoem timestamp without time zone
+);
+
+
+ALTER TABLE osler.pergunta OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 17155)
+-- Name: questionario; Type: TABLE; Schema: osler; Owner: postgres
+--
+
+CREATE TABLE osler.questionario (
+    idquestionario bigint NOT NULL,
+    ididioma bigint NOT NULL,
+    descricao character varying(255) NOT NULL,
+    criadopor bigint,
+    criadoem timestamp without time zone,
+    modificadopor bigint,
+    modificadoem timestamp without time zone
+);
+
+
+ALTER TABLE osler.questionario OWNER TO postgres;
+
+--
+-- TOC entry 224 (class 1259 OID 17200)
+-- Name: tipoleitura; Type: TABLE; Schema: osler; Owner: postgres
+--
+
+CREATE TABLE osler.tipoleitura (
+    idtipoleitura bigint NOT NULL,
+    descricao character varying(255) NOT NULL,
+    medida character varying(50),
+    criadopor bigint,
+    criadoem timestamp without time zone,
+    modificadopor bigint,
+    modificadoem timestamp without time zone
+);
+
+
+ALTER TABLE osler.tipoleitura OWNER TO postgres;
+
+--
+-- TOC entry 210 (class 1259 OID 17122)
+-- Name: utilizador; Type: TABLE; Schema: osler; Owner: postgres
+--
+
+CREATE TABLE osler.utilizador (
+    idutilizador bigint NOT NULL,
+    ididioma bigint NOT NULL,
+    nome character varying(80) NOT NULL,
+    password character varying(255) NOT NULL,
+    nivelacesso smallint DEFAULT 0 NOT NULL,
+    ativo boolean DEFAULT true NOT NULL,
+    criadopor bigint,
+    criadoem timestamp without time zone,
+    modificadopor bigint,
+    modificadoem timestamp without time zone
+);
+
+
+ALTER TABLE osler.utilizador OWNER TO postgres;
+
+--
+-- TOC entry 3431 (class 0 OID 17150)
+-- Dependencies: 215
+-- Data for Name: cortriagem; Type: TABLE DATA; Schema: osler; Owner: postgres
+--
+
+INSERT INTO osler.cortriagem (idcortriagem, descricao, codigocorhex, criadopor, criadoem, modificadopor, modificadoem) VALUES (1, 'DOENTE EMERGENTE', '#e2112e', NULL, '2022-04-12 14:40:40.090437', NULL, '2022-04-12 14:40:40.090439');
+INSERT INTO osler.cortriagem (idcortriagem, descricao, codigocorhex, criadopor, criadoem, modificadopor, modificadoem) VALUES (2, 'DOENTE MUITO URGENTE', '#f39433', NULL, '2022-04-12 14:40:40.109027', NULL, '2022-04-12 14:40:40.109032');
+INSERT INTO osler.cortriagem (idcortriagem, descricao, codigocorhex, criadopor, criadoem, modificadopor, modificadoem) VALUES (3, 'DOENTE URGENTE', '#f7db35', NULL, '2022-04-12 14:40:40.111555', NULL, '2022-04-12 14:40:40.111557');
+INSERT INTO osler.cortriagem (idcortriagem, descricao, codigocorhex, criadopor, criadoem, modificadopor, modificadoem) VALUES (4, 'DOENTE POUCO URGENTE', '#3eab62', NULL, '2022-04-12 14:40:40.113725', NULL, '2022-04-12 14:40:40.113727');
+INSERT INTO osler.cortriagem (idcortriagem, descricao, codigocorhex, criadopor, criadoem, modificadopor, modificadoem) VALUES (5, 'DOENTE NÃO URGENTE', '#3d99d5', NULL, '2022-04-12 14:40:40.115848', NULL, '2022-04-12 14:40:40.115849');
+
+
+--
+-- TOC entry 3428 (class 0 OID 17134)
+-- Dependencies: 212
+-- Data for Name: episodio; Type: TABLE DATA; Schema: osler; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3437 (class 0 OID 17185)
+-- Dependencies: 221
+-- Data for Name: episodiohistlocal; Type: TABLE DATA; Schema: osler; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3438 (class 0 OID 17190)
+-- Dependencies: 222
+-- Data for Name: episodionotificacao; Type: TABLE DATA; Schema: osler; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3433 (class 0 OID 17160)
+-- Dependencies: 217
+-- Data for Name: episodioquestionario; Type: TABLE DATA; Schema: osler; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3436 (class 0 OID 17178)
+-- Dependencies: 220
+-- Data for Name: episodioquestresposta; Type: TABLE DATA; Schema: osler; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3439 (class 0 OID 17195)
+-- Dependencies: 223
+-- Data for Name: episodioregistodados; Type: TABLE DATA; Schema: osler; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3427 (class 0 OID 17129)
+-- Dependencies: 211
+-- Data for Name: idioma; Type: TABLE DATA; Schema: osler; Owner: postgres
+--
+
+INSERT INTO osler.idioma (ididioma, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (1, 'Português', NULL, '2022-04-04 12:32:53.87384', NULL, '2022-04-04 12:32:53.873841');
+INSERT INTO osler.idioma (ididioma, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022040417324059057, 'Test Language', NULL, '2022-04-04 17:32:40.101803', NULL, '2022-04-04 17:32:40.101803');
+INSERT INTO osler.idioma (ididioma, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022040416012895192, 'ucraniano', NULL, '2022-04-04 16:01:28.299421', NULL, '2022-04-11 21:05:30.268601');
+
+
+--
+-- TOC entry 3441 (class 0 OID 17303)
+-- Dependencies: 225
+-- Data for Name: itemfluxomanchester; Type: TABLE DATA; Schema: osler; Owner: postgres
+--
+
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372124944, 1, 'Compromisso da via aérea', 2, '2022-04-13 21:37:21.23346', 2, '2022-04-13 21:37:21.233596');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372725365, 1, 'Respiração ineficaz', 2, '2022-04-13 21:37:27.942598', 2, '2022-04-13 21:37:27.942598');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372785760, 1, 'Choque', 2, '2022-04-13 21:37:28.00851', 2, '2022-04-13 21:37:28.00851');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372826164, 1, 'Criança que não responde', 2, '2022-04-13 21:37:28.08248', 2, '2022-04-13 21:37:28.082481');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372826585, 1, 'Convulsão atual', 2, '2022-04-13 21:37:28.142621', 2, '2022-04-13 21:37:28.142622');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372826998, 2, 'Grande hemorragia incontrolável', 2, '2022-04-13 21:37:28.222633', 2, '2022-04-13 21:37:28.222634');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372827324, 2, 'Alteração do estado de consciência de novo', 2, '2022-04-13 21:37:28.322321', 2, '2022-04-13 21:37:28.322321');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372827711, 2, 'Criança muito quente', 2, '2022-04-13 21:37:28.362442', 2, '2022-04-13 21:37:28.362443');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372888174, 2, 'Adulto muito quente', 2, '2022-04-13 21:37:28.478221', 2, '2022-04-13 21:37:28.478221');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372828550, 2, 'Dor severa', 2, '2022-04-13 21:37:28.582394', 2, '2022-04-13 21:37:28.582394');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372828963, 3, 'Pequena hemorragia incontrolável', 2, '2022-04-13 21:37:28.682798', 2, '2022-04-13 21:37:28.682799');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372829311, 3, 'História inapropriada', 2, '2022-04-13 21:37:28.772718', 2, '2022-04-13 21:37:28.772719');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372829755, 3, 'Vómitos persistentes', 2, '2022-04-13 21:37:28.832731', 2, '2022-04-13 21:37:28.832731');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372851225, 3, 'Criança quente', 2, '2022-04-13 21:37:28.925892', 2, '2022-04-13 21:37:28.925893');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372861693, 3, 'Adulto quente', 2, '2022-04-13 21:37:29.026505', 2, '2022-04-13 21:37:29.026506');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372922077, 3, 'Dor moderada', 2, '2022-04-13 21:37:29.082496', 2, '2022-04-13 21:37:29.082497');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372922439, 4, 'Subfebril (Febrícula)', 2, '2022-04-13 21:37:29.162793', 2, '2022-04-13 21:37:29.162794');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372922813, 4, 'Vómitos', 2, '2022-04-13 21:37:29.222583', 2, '2022-04-13 21:37:29.222584');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372923220, 4, 'Dor ligeira <7 dias', 2, '2022-04-13 21:37:29.282756', 2, '2022-04-13 21:37:29.282757');
+INSERT INTO osler.itemfluxomanchester (iditemfluxomanchester, idcortriagem, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041321372923696, 4, 'Problema recente', 2, '2022-04-13 21:37:29.342699', 2, '2022-04-13 21:37:29.3427');
+
+
+--
+-- TOC entry 3429 (class 0 OID 17140)
+-- Dependencies: 213
+-- Data for Name: local; Type: TABLE DATA; Schema: osler; Owner: postgres
+--
+
+INSERT INTO osler.local (idlocal, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (1, 'Sala de espera', NULL, '2022-04-06 10:56:50.876103', NULL, '2022-04-06 10:56:50.876112');
+INSERT INTO osler.local (idlocal, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041023225821536, 'Análises', NULL, '2022-04-10 23:22:50.393879', NULL, '2022-04-10 23:22:50.393879');
+INSERT INTO osler.local (idlocal, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041120562105215, 'Sala de espera Ortopedia', NULL, '2022-04-11 20:56:21.973228', NULL, '2022-04-11 20:56:21.973228');
+
+
+--
+-- TOC entry 3435 (class 0 OID 17172)
+-- Dependencies: 219
+-- Data for Name: loginregisto; Type: TABLE DATA; Schema: osler; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3430 (class 0 OID 17145)
+-- Dependencies: 214
+-- Data for Name: nacionalidade; Type: TABLE DATA; Schema: osler; Owner: postgres
+--
+
+INSERT INTO osler.nacionalidade (idnacionalidade, ididioma, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (1, 1, 'portuguesa', NULL, '2022-04-06 10:56:50.991751', NULL, '2022-04-06 10:56:50.991756');
+INSERT INTO osler.nacionalidade (idnacionalidade, ididioma, descricao, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041121094915850, 2022040416012895192, 'ucraniana', NULL, '2022-04-11 21:09:49.652776', NULL, '2022-04-11 21:09:49.652776');
+
+
+--
+-- TOC entry 3434 (class 0 OID 17166)
+-- Dependencies: 218
+-- Data for Name: pergunta; Type: TABLE DATA; Schema: osler; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3432 (class 0 OID 17155)
+-- Dependencies: 216
+-- Data for Name: questionario; Type: TABLE DATA; Schema: osler; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3440 (class 0 OID 17200)
+-- Dependencies: 224
+-- Data for Name: tipoleitura; Type: TABLE DATA; Schema: osler; Owner: postgres
+--
+
+INSERT INTO osler.tipoleitura (idtipoleitura, descricao, medida, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041121451639038, 'Tensão arterial', 'mm Hg', NULL, '2022-04-11 21:45:16.645295', NULL, '2022-04-11 21:45:16.645295');
+
+
+--
+-- TOC entry 3426 (class 0 OID 17122)
+-- Dependencies: 210
+-- Data for Name: utilizador; Type: TABLE DATA; Schema: osler; Owner: postgres
+--
+
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (2, 1, 'sysadmin', 'teste', 0, true, NULL, NULL, NULL, NULL);
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022040416012805439, 2022040416012895192, 'Teste', '123', 0, true, NULL, '2022-04-04 16:01:28.360603', NULL, '2022-04-04 16:01:28.360603');
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022040417324069678, 2022040417324059057, 'Teste', '123', 0, true, NULL, '2022-04-04 17:32:40.16583', NULL, '2022-04-04 17:32:40.16583');
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022040418122456288, 1, 'Teste', '123', 0, true, NULL, '2022-04-04 18:12:24.699957', NULL, '2022-04-04 18:13:06.206099');
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022040418144392780, 1, 'Teste', '123', 0, true, NULL, '2022-04-04 18:14:43.877936', NULL, '2022-04-04 18:14:52.11485');
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022040418245265186, 1, 'Teste', '123', 0, true, NULL, '2022-04-04 18:24:52.776323', NULL, '2022-04-04 18:24:52.843723');
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022040419552761649, 1, 'Teste', '123', 0, true, NULL, '2022-04-04 19:55:27.039617', NULL, '2022-04-04 19:55:27.11239');
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022040419581809865, 1, 'Teste', '123', 0, true, NULL, '2022-04-04 19:58:18.703379', NULL, '2022-04-04 19:58:18.703379');
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022040420013307324, 1, 'Teste', '123', 0, true, NULL, '2022-04-04 20:01:33.728032', NULL, '2022-04-04 20:01:33.8228');
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022040516451001573, 1, 'Teste', '123', 0, true, NULL, '2022-04-05 16:45:10.358226', NULL, '2022-04-05 16:45:10.358226');
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022040610565043979, 1, 'Teste', '123', 0, true, NULL, '2022-04-06 10:56:50.908944', NULL, '2022-04-06 10:56:50.908944');
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022040621434057454, 1, 'Teste', '123', 0, true, NULL, '2022-04-06 21:43:40.753453', NULL, '2022-04-06 21:43:40.753453');
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022040916065758160, 1, 'Teste', '123', 0, true, NULL, '2022-04-09 16:06:57.727623', NULL, '2022-04-09 16:06:57.727623');
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041210475518824, 1, 'triagemtest', 'triagemtest', 2, true, NULL, '2022-04-12 10:47:55.015796', NULL, '2022-04-12 10:47:55.015796');
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041210475529015, 1, 'enfermeirotest', 'enfermeirotest', 3, true, NULL, '2022-04-12 10:47:55.148419', NULL, '2022-04-12 10:47:55.148419');
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041210475559240, 1, 'medicotest', 'medicotest', 4, true, NULL, '2022-04-12 10:47:55.176253', NULL, '2022-04-12 10:47:55.176253');
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (2022041210475529456, 1, 'sysadmintest', 'sysadmintest', 5, true, NULL, '2022-04-12 10:47:55.272084', NULL, '2022-04-12 10:47:55.272084');
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (0, 1, 'utente', 'utente', 0, true, NULL, '2022-04-12 15:00:57.87744', NULL, '2022-04-12 15:00:57.877537');
+INSERT INTO osler.utilizador (idutilizador, ididioma, nome, password, nivelacesso, ativo, criadopor, criadoem, modificadopor, modificadoem) VALUES (1, 1, 'acompanhante', 'acompanhante', 1, true, NULL, '2022-04-12 15:00:57.901092', NULL, '2022-04-12 15:00:57.901095');
+
+
+--
+-- TOC entry 3245 (class 2606 OID 17154)
+-- Name: cortriagem cortriagem_pkey; Type: CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.cortriagem
+    ADD CONSTRAINT cortriagem_pkey PRIMARY KEY (idcortriagem);
+
+
+--
+-- TOC entry 3239 (class 2606 OID 17139)
+-- Name: episodio episodio_pkey; Type: CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodio
+    ADD CONSTRAINT episodio_pkey PRIMARY KEY (idepisodio);
+
+
+--
+-- TOC entry 3258 (class 2606 OID 17189)
+-- Name: episodiohistlocal episodiohistlocal_pkey; Type: CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodiohistlocal
+    ADD CONSTRAINT episodiohistlocal_pkey PRIMARY KEY (idhistoricolocal);
+
+
+--
+-- TOC entry 3260 (class 2606 OID 17194)
+-- Name: episodionotificacao episodionotificacao_pkey; Type: CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodionotificacao
+    ADD CONSTRAINT episodionotificacao_pkey PRIMARY KEY (idnotificacao);
+
+
+--
+-- TOC entry 3249 (class 2606 OID 17165)
+-- Name: episodioquestionario episodioquestionario_pkey; Type: CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodioquestionario
+    ADD CONSTRAINT episodioquestionario_pkey PRIMARY KEY (idepisodioquestionario);
+
+
+--
+-- TOC entry 3256 (class 2606 OID 17184)
+-- Name: episodioquestresposta episodioquestresposta_pkey; Type: CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodioquestresposta
+    ADD CONSTRAINT episodioquestresposta_pkey PRIMARY KEY (idepisodioquestionario, sequenciaresposta);
+
+
+--
+-- TOC entry 3262 (class 2606 OID 17199)
+-- Name: episodioregistodados episodioregistodados_pkey; Type: CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodioregistodados
+    ADD CONSTRAINT episodioregistodados_pkey PRIMARY KEY (idregistodados);
+
+
+--
+-- TOC entry 3237 (class 2606 OID 17133)
+-- Name: idioma idioma_pkey; Type: CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.idioma
+    ADD CONSTRAINT idioma_pkey PRIMARY KEY (ididioma);
+
+
+--
+-- TOC entry 3266 (class 2606 OID 17307)
+-- Name: itemfluxomanchester itemfluxomanchester_pkey; Type: CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.itemfluxomanchester
+    ADD CONSTRAINT itemfluxomanchester_pkey PRIMARY KEY (iditemfluxomanchester);
+
+
+--
+-- TOC entry 3241 (class 2606 OID 17144)
+-- Name: local local_pkey; Type: CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.local
+    ADD CONSTRAINT local_pkey PRIMARY KEY (idlocal);
+
+
+--
+-- TOC entry 3253 (class 2606 OID 17177)
+-- Name: loginregisto loginregisto_pkey; Type: CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.loginregisto
+    ADD CONSTRAINT loginregisto_pkey PRIMARY KEY (idlogin);
+
+
+--
+-- TOC entry 3243 (class 2606 OID 17149)
+-- Name: nacionalidade nacionalidade_pkey; Type: CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.nacionalidade
+    ADD CONSTRAINT nacionalidade_pkey PRIMARY KEY (idnacionalidade);
+
+
+--
+-- TOC entry 3251 (class 2606 OID 17171)
+-- Name: pergunta pergunta_pkey; Type: CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.pergunta
+    ADD CONSTRAINT pergunta_pkey PRIMARY KEY (idpergunta);
+
+
+--
+-- TOC entry 3247 (class 2606 OID 17159)
+-- Name: questionario questionario_pkey; Type: CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.questionario
+    ADD CONSTRAINT questionario_pkey PRIMARY KEY (idquestionario);
+
+
+--
+-- TOC entry 3264 (class 2606 OID 17204)
+-- Name: tipoleitura tipoleitura_pkey; Type: CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.tipoleitura
+    ADD CONSTRAINT tipoleitura_pkey PRIMARY KEY (idtipoleitura);
+
+
+--
+-- TOC entry 3234 (class 2606 OID 17128)
+-- Name: utilizador utilizador_pkey; Type: CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.utilizador
+    ADD CONSTRAINT utilizador_pkey PRIMARY KEY (idutilizador);
+
+
+--
+-- TOC entry 3235 (class 1259 OID 17301)
+-- Name: idioma_descricao; Type: INDEX; Schema: osler; Owner: postgres
+--
+
+CREATE INDEX idioma_descricao ON osler.idioma USING btree (descricao);
+
+
+--
+-- TOC entry 3254 (class 1259 OID 17313)
+-- Name: tokenpayload_index; Type: INDEX; Schema: osler; Owner: postgres
+--
+
+CREATE INDEX tokenpayload_index ON osler.loginregisto USING btree (tokenpayload);
+
+
+--
+-- TOC entry 3232 (class 1259 OID 17302)
+-- Name: utilizador_nome; Type: INDEX; Schema: osler; Owner: postgres
+--
+
+CREATE INDEX utilizador_nome ON osler.utilizador USING btree (nome);
+
+
+--
+-- TOC entry 3270 (class 2606 OID 17226)
+-- Name: episodio fkepisodio252970; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodio
+    ADD CONSTRAINT fkepisodio252970 FOREIGN KEY (idcortriagem) REFERENCES osler.cortriagem(idcortriagem);
+
+
+--
+-- TOC entry 3269 (class 2606 OID 17221)
+-- Name: episodio fkepisodio631889; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodio
+    ADD CONSTRAINT fkepisodio631889 FOREIGN KEY (idnacionalidade) REFERENCES osler.nacionalidade(idnacionalidade);
+
+
+--
+-- TOC entry 3268 (class 2606 OID 17211)
+-- Name: episodio fkepisodio654607; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodio
+    ADD CONSTRAINT fkepisodio654607 FOREIGN KEY (ididioma) REFERENCES osler.idioma(ididioma);
+
+
+--
+-- TOC entry 3282 (class 2606 OID 17281)
+-- Name: episodiohistlocal fkepisodiohi471782; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodiohistlocal
+    ADD CONSTRAINT fkepisodiohi471782 FOREIGN KEY (idepisodio) REFERENCES osler.episodio(idepisodio);
+
+
+--
+-- TOC entry 3281 (class 2606 OID 17276)
+-- Name: episodiohistlocal fkepisodiohi910423; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodiohistlocal
+    ADD CONSTRAINT fkepisodiohi910423 FOREIGN KEY (idlocal) REFERENCES osler.local(idlocal);
+
+
+--
+-- TOC entry 3283 (class 2606 OID 17286)
+-- Name: episodionotificacao fkepisodiono635650; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodionotificacao
+    ADD CONSTRAINT fkepisodiono635650 FOREIGN KEY (idepisodio) REFERENCES osler.episodio(idepisodio);
+
+
+--
+-- TOC entry 3273 (class 2606 OID 17236)
+-- Name: episodioquestionario fkepisodioqu189786; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodioquestionario
+    ADD CONSTRAINT fkepisodioqu189786 FOREIGN KEY (idepisodio) REFERENCES osler.episodio(idepisodio);
+
+
+--
+-- TOC entry 3274 (class 2606 OID 17241)
+-- Name: episodioquestionario fkepisodioqu475963; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodioquestionario
+    ADD CONSTRAINT fkepisodioqu475963 FOREIGN KEY (idquestionario) REFERENCES osler.questionario(idquestionario);
+
+
+--
+-- TOC entry 3279 (class 2606 OID 17266)
+-- Name: episodioquestresposta fkepisodioqu555319; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodioquestresposta
+    ADD CONSTRAINT fkepisodioqu555319 FOREIGN KEY (idquestionario) REFERENCES osler.questionario(idquestionario);
+
+
+--
+-- TOC entry 3280 (class 2606 OID 17271)
+-- Name: episodioquestresposta fkepisodioqu874849; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodioquestresposta
+    ADD CONSTRAINT fkepisodioqu874849 FOREIGN KEY (idpergunta) REFERENCES osler.pergunta(idpergunta);
+
+
+--
+-- TOC entry 3278 (class 2606 OID 17261)
+-- Name: episodioquestresposta fkepisodioqu895511; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodioquestresposta
+    ADD CONSTRAINT fkepisodioqu895511 FOREIGN KEY (idepisodioquestionario) REFERENCES osler.episodioquestionario(idepisodioquestionario);
+
+
+--
+-- TOC entry 3285 (class 2606 OID 17296)
+-- Name: episodioregistodados fkepisodiore52333; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodioregistodados
+    ADD CONSTRAINT fkepisodiore52333 FOREIGN KEY (idtipoleitura) REFERENCES osler.tipoleitura(idtipoleitura);
+
+
+--
+-- TOC entry 3284 (class 2606 OID 17291)
+-- Name: episodioregistodados fkepisodiore635260; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.episodioregistodados
+    ADD CONSTRAINT fkepisodiore635260 FOREIGN KEY (idepisodio) REFERENCES osler.episodio(idepisodio);
+
+
+--
+-- TOC entry 3286 (class 2606 OID 17308)
+-- Name: itemfluxomanchester fkitemfluxomanchester695798; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.itemfluxomanchester
+    ADD CONSTRAINT fkitemfluxomanchester695798 FOREIGN KEY (idcortriagem) REFERENCES osler.cortriagem(idcortriagem);
+
+
+--
+-- TOC entry 3276 (class 2606 OID 17251)
+-- Name: loginregisto fkloginregis224005; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.loginregisto
+    ADD CONSTRAINT fkloginregis224005 FOREIGN KEY (idutilizador) REFERENCES osler.utilizador(idutilizador);
+
+
+--
+-- TOC entry 3277 (class 2606 OID 17256)
+-- Name: loginregisto fkloginregis701700; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.loginregisto
+    ADD CONSTRAINT fkloginregis701700 FOREIGN KEY (idepisodio) REFERENCES osler.episodio(idepisodio);
+
+
+--
+-- TOC entry 3271 (class 2606 OID 17216)
+-- Name: nacionalidade fknacionalid695798; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.nacionalidade
+    ADD CONSTRAINT fknacionalid695798 FOREIGN KEY (ididioma) REFERENCES osler.idioma(ididioma);
+
+
+--
+-- TOC entry 3275 (class 2606 OID 17246)
+-- Name: pergunta fkpergunta469295; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.pergunta
+    ADD CONSTRAINT fkpergunta469295 FOREIGN KEY (idquestionario) REFERENCES osler.questionario(idquestionario);
+
+
+--
+-- TOC entry 3272 (class 2606 OID 17231)
+-- Name: questionario fkquestionar241870; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.questionario
+    ADD CONSTRAINT fkquestionar241870 FOREIGN KEY (ididioma) REFERENCES osler.idioma(ididioma);
+
+
+--
+-- TOC entry 3267 (class 2606 OID 17206)
+-- Name: utilizador fkutilizador909733; Type: FK CONSTRAINT; Schema: osler; Owner: postgres
+--
+
+ALTER TABLE ONLY osler.utilizador
+    ADD CONSTRAINT fkutilizador909733 FOREIGN KEY (ididioma) REFERENCES osler.idioma(ididioma);
+
+
+-- Completed on 2022-04-20 19:02:25
+
+--
+-- PostgreSQL database dump complete
+--
+

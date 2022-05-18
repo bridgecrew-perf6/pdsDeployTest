@@ -1,0 +1,1294 @@
+{
+	"info": {
+		"_postman_id": "d2037d3a-7b81-4f41-84de-663ed70f829b",
+		"name": "OSLERTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();",
+									"",
+									"const schema = {",
+									" \"token\": \"string\"",
+									"};",
+									"",
+									"pm.test('Schema is valid', function() {",
+									"  pm.response.to.have.jsonSchema(schema)",
+									"});",
+									"",
+									"pm.globals.set(\"token\", response.token);",
+									"",
+									"pm.test(\"Status e 200\", function(){",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test(\"Tem token\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.token).to.exist;",
+									"});",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"{{user}}\",\n    \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/Login",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login Utente",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user\": \"{{user}}\",\n    \"password\": \"{{password}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/Login",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 11 Apr 2022 20:43:34 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1dGVudGUiLCJleHAiOjE2ODEyNDU4MTUsImlzcyI6InN5c2FkbWluIiwiYXVkIjoidXRlbnRlIn0.kKxCVwWQnpINbnUWKNxoTye1hFBJYOG1TzjyamN7bhY\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Lista",
+			"item": [
+				{
+					"name": "Idiomas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const schema = [\r",
+									"    {\r",
+									"        \"id\" : \"number\",\r",
+									"        \"descricao\" : \"string\"\r",
+									"    }\r",
+									"]\r",
+									"\r",
+									"pm.test('Schema is valid', function() {\r",
+									"  pm.response.to.have.jsonSchema(schema)\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/Lista/Idiomas",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Lista",
+								"Idiomas"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Idiomas",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/Lista/Idiomas",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Lista",
+										"Idiomas"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 12 Apr 2022 12:43:07 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[{\"id\":1,\"descricao\":\"Português\"},{\"id\":2022040416012895192,\"descricao\":\"Test Language\"},{\"id\":2022040417324059057,\"descricao\":\"Test Language\"}]"
+						}
+					]
+				},
+				{
+					"name": "Locais",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/Lista/Locais",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Lista",
+								"Locais"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Nacionalidades",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/Lista/Nacionalidades",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Lista",
+								"Nacionalidades"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/Lista/Cores",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Lista",
+								"Cores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TiposLeitura",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/Lista/TiposLeitura",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Lista",
+								"TiposLeitura"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NiveisAcesso",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/Lista/NiveisAcesso",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Lista",
+								"NiveisAcesso"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Questionario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/Sysadmin/Questionario/Lista",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Sysadmin",
+								"Questionario",
+								"Lista"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PerguntasQuestionario",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"idQuestionario\", \"2022041805144448652\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/Questionario/{{idQuestionario}}/Perguntas/List",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Questionario",
+								"{{idQuestionario}}",
+								"Perguntas",
+								"List"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Episodio",
+			"item": [
+				{
+					"name": "Local",
+					"item": [
+						{
+							"name": "Obter Ultima Localização",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5001/OSLER/Episodio/{{idEpisodio}}/Local",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"OSLER",
+										"Episodio",
+										"{{idEpisodio}}",
+										"Local"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Obter Ultima Localização",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/OSLER/Episodio/{{idEpisodio}}/Local",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"OSLER",
+												"Episodio",
+												"{{idEpisodio}}",
+												"Local"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 18 Apr 2022 11:20:12 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"idHistoricoLocal\": 2022041802382231363,\n    \"dataHora\": \"2022-04-18T02:38:22.260681\",\n    \"local\": {\n        \"idLocal\": 2,\n        \"descricao\": \"Local2\",\n        \"defaultId\": 1,\n        \"defaultDescricao\": \"Sala de espera\",\n        \"isPersistent\": true,\n        \"isLoading\": false,\n        \"criadoEm\": \"2022-04-18T02:23:18.221784\",\n        \"criadoPor\": {\n            \"idUtilizador\": 2,\n            \"ativo\": true,\n            \"nome\": \"sysadmin\",\n            \"password\": \"sysadmin\",\n            \"nivelAcesso\": 5,\n            \"idioma\": {\n                \"idIdioma\": 1,\n                \"descricao\": \"Português\",\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"Português\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                \"modificadoPor\": null\n            },\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n            \"modificadoPor\": null\n        },\n        \"modificadoEm\": \"2022-04-18T12:20:12.393779+01:00\",\n        \"modificadoPor\": {\n            \"idUtilizador\": 2,\n            \"ativo\": true,\n            \"nome\": \"sysadmin\",\n            \"password\": \"sysadmin\",\n            \"nivelAcesso\": 5,\n            \"idioma\": {\n                \"idIdioma\": 1,\n                \"descricao\": \"Português\",\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"Português\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                \"modificadoPor\": null\n            },\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n            \"modificadoPor\": null\n        }\n    },\n    \"episodio\": {\n        \"idEpisodio\": 1,\n        \"descricao\": \"descricao ep 1\",\n        \"idSns\": \"123456\",\n        \"estado\": 1,\n        \"dataAberto\": \"2022-04-18T01:46:37.292302\",\n        \"dataFechado\": \"2022-04-18T01:50:16.04572\",\n        \"idioma\": {\n            \"idIdioma\": 1,\n            \"descricao\": \"Português\",\n            \"defaultId\": 1,\n            \"defaultDescricao\": \"Português\",\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n            \"modificadoPor\": null\n        },\n        \"nacionalidade\": {\n            \"idNacionalidade\": 1,\n            \"descricao\": \"nacionalidade 1\",\n            \"idiomaNacionalidade\": {\n                \"idIdioma\": 1,\n                \"descricao\": \"Português\",\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"Português\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                \"modificadoPor\": null\n            },\n            \"defaultId\": 1,\n            \"defaultDescricao\": \"portuguesa\",\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:38:42.353207\",\n            \"criadoPor\": {\n                \"idUtilizador\": 2,\n                \"ativo\": true,\n                \"nome\": \"sysadmin\",\n                \"password\": \"sysadmin\",\n                \"nivelAcesso\": 5,\n                \"idioma\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                \"modificadoPor\": null\n            },\n            \"modificadoEm\": \"2022-04-18T12:20:12.395999+01:00\",\n            \"modificadoPor\": {\n                \"idUtilizador\": 2,\n                \"ativo\": true,\n                \"nome\": \"sysadmin\",\n                \"password\": \"sysadmin\",\n                \"nivelAcesso\": 5,\n                \"idioma\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                \"modificadoPor\": null\n            }\n        },\n        \"corTriagem\": {\n            \"idCorTriagem\": 1,\n            \"descricao\": \"cor 1\",\n            \"codigoCorHex\": \"123\",\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:37:44.866404\",\n            \"criadoPor\": {\n                \"idUtilizador\": 2,\n                \"ativo\": true,\n                \"nome\": \"sysadmin\",\n                \"password\": \"sysadmin\",\n                \"nivelAcesso\": 5,\n                \"idioma\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                \"modificadoPor\": null\n            },\n            \"modificadoEm\": \"2022-04-18T12:20:12.395186+01:00\",\n            \"modificadoPor\": {\n                \"idUtilizador\": 2,\n                \"ativo\": true,\n                \"nome\": \"sysadmin\",\n                \"password\": \"sysadmin\",\n                \"nivelAcesso\": 5,\n                \"idioma\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                \"modificadoPor\": null\n            }\n        },\n        \"dataNascimento\": \"2022-04-18T00:00:00\",\n        \"pin4\": 2022,\n        \"estadoTxt\": \"crit\",\n        \"codEpisodio\": \"1\",\n        \"isPersistent\": true,\n        \"isLoading\": false,\n        \"criadoEm\": \"2022-04-18T01:46:37.292302\",\n        \"criadoPor\": {\n            \"idUtilizador\": 2,\n            \"ativo\": true,\n            \"nome\": \"sysadmin\",\n            \"password\": \"sysadmin\",\n            \"nivelAcesso\": 5,\n            \"idioma\": {\n                \"idIdioma\": 1,\n                \"descricao\": \"Português\",\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"Português\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                \"modificadoPor\": null\n            },\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n            \"modificadoPor\": null\n        },\n        \"modificadoEm\": \"2022-04-18T12:20:12.396945+01:00\",\n        \"modificadoPor\": null\n    },\n    \"isPersistent\": true,\n    \"isLoading\": false,\n    \"criadoEm\": \"2022-04-18T02:38:22.26471\",\n    \"criadoPor\": null,\n    \"modificadoEm\": \"2022-04-18T02:38:22.323594\",\n    \"modificadoPor\": null\n}"
+								}
+							]
+						},
+						{
+							"name": "Modificar Localização",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5001/OSLER/Episodio/{{idEpisodio}}/Local?idLocal=2",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"OSLER",
+										"Episodio",
+										"{{idEpisodio}}",
+										"Local"
+									],
+									"query": [
+										{
+											"key": "idLocal",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Modificar Localização",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/OSLER/Episodio/{{idEpisodio}}/Local?idLocal=1",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"OSLER",
+												"Episodio",
+												"{{idEpisodio}}",
+												"Local"
+											],
+											"query": [
+												{
+													"key": "idLocal",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 18 Apr 2022 11:21:20 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"idHistoricoLocal\": 2022041812212072732,\n    \"dataHora\": \"2022-04-18T12:21:20.757905+01:00\",\n    \"local\": {\n        \"idLocal\": 1,\n        \"descricao\": \"local 1\",\n        \"defaultId\": 1,\n        \"defaultDescricao\": \"Sala de espera\",\n        \"isPersistent\": true,\n        \"isLoading\": false,\n        \"criadoEm\": \"2022-04-18T01:40:13.776939\",\n        \"criadoPor\": {\n            \"idUtilizador\": 2,\n            \"ativo\": true,\n            \"nome\": \"sysadmin\",\n            \"password\": \"sysadmin\",\n            \"nivelAcesso\": 5,\n            \"idioma\": {\n                \"idIdioma\": 1,\n                \"descricao\": \"Português\",\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"Português\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                \"modificadoPor\": null\n            },\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n            \"modificadoPor\": null\n        },\n        \"modificadoEm\": \"2022-04-18T12:21:20.757427+01:00\",\n        \"modificadoPor\": {\n            \"idUtilizador\": 2,\n            \"ativo\": true,\n            \"nome\": \"sysadmin\",\n            \"password\": \"sysadmin\",\n            \"nivelAcesso\": 5,\n            \"idioma\": {\n                \"idIdioma\": 1,\n                \"descricao\": \"Português\",\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"Português\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                \"modificadoPor\": null\n            },\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n            \"modificadoPor\": null\n        }\n    },\n    \"episodio\": {\n        \"idEpisodio\": 1,\n        \"descricao\": \"descricao ep 1\",\n        \"idSns\": \"123456\",\n        \"estado\": 1,\n        \"dataAberto\": \"2022-04-18T01:46:37.292302\",\n        \"dataFechado\": \"2022-04-18T01:50:16.04572\",\n        \"idioma\": {\n            \"idIdioma\": 1,\n            \"descricao\": \"Português\",\n            \"defaultId\": 1,\n            \"defaultDescricao\": \"Português\",\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n            \"modificadoPor\": null\n        },\n        \"nacionalidade\": {\n            \"idNacionalidade\": 1,\n            \"descricao\": \"nacionalidade 1\",\n            \"idiomaNacionalidade\": {\n                \"idIdioma\": 1,\n                \"descricao\": \"Português\",\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"Português\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                \"modificadoPor\": null\n            },\n            \"defaultId\": 1,\n            \"defaultDescricao\": \"portuguesa\",\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:38:42.353207\",\n            \"criadoPor\": {\n                \"idUtilizador\": 2,\n                \"ativo\": true,\n                \"nome\": \"sysadmin\",\n                \"password\": \"sysadmin\",\n                \"nivelAcesso\": 5,\n                \"idioma\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                \"modificadoPor\": null\n            },\n            \"modificadoEm\": \"2022-04-18T12:21:20.759013+01:00\",\n            \"modificadoPor\": {\n                \"idUtilizador\": 2,\n                \"ativo\": true,\n                \"nome\": \"sysadmin\",\n                \"password\": \"sysadmin\",\n                \"nivelAcesso\": 5,\n                \"idioma\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                \"modificadoPor\": null\n            }\n        },\n        \"corTriagem\": {\n            \"idCorTriagem\": 1,\n            \"descricao\": \"cor 1\",\n            \"codigoCorHex\": \"123\",\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:37:44.866404\",\n            \"criadoPor\": {\n                \"idUtilizador\": 2,\n                \"ativo\": true,\n                \"nome\": \"sysadmin\",\n                \"password\": \"sysadmin\",\n                \"nivelAcesso\": 5,\n                \"idioma\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                \"modificadoPor\": null\n            },\n            \"modificadoEm\": \"2022-04-18T12:21:20.758307+01:00\",\n            \"modificadoPor\": {\n                \"idUtilizador\": 2,\n                \"ativo\": true,\n                \"nome\": \"sysadmin\",\n                \"password\": \"sysadmin\",\n                \"nivelAcesso\": 5,\n                \"idioma\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                \"modificadoPor\": null\n            }\n        },\n        \"dataNascimento\": \"2022-04-18T00:00:00\",\n        \"pin4\": 2022,\n        \"estadoTxt\": \"crit\",\n        \"codEpisodio\": \"1\",\n        \"isPersistent\": true,\n        \"isLoading\": false,\n        \"criadoEm\": \"2022-04-18T01:46:37.292302\",\n        \"criadoPor\": {\n            \"idUtilizador\": 2,\n            \"ativo\": true,\n            \"nome\": \"sysadmin\",\n            \"password\": \"sysadmin\",\n            \"nivelAcesso\": 5,\n            \"idioma\": {\n                \"idIdioma\": 1,\n                \"descricao\": \"Português\",\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"Português\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                \"modificadoPor\": null\n            },\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n            \"modificadoPor\": null\n        },\n        \"modificadoEm\": \"2022-04-18T12:21:20.759942+01:00\",\n        \"modificadoPor\": null\n    },\n    \"isPersistent\": true,\n    \"isLoading\": false,\n    \"criadoEm\": \"2022-04-18T12:21:20.759945+01:00\",\n    \"criadoPor\": null,\n    \"modificadoEm\": \"2022-04-18T12:21:20.857216+01:00\",\n    \"modificadoPor\": null\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Questionario",
+					"item": [
+						{
+							"name": "Adicionar Questionario",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"idQuestionario\": 2022041812395077096,\n    \"sequenciaQuestionario\": 4\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/Episodio/{{idEpisodio}}/Questionario/Add",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Episodio",
+										"{{idEpisodio}}",
+										"Questionario",
+										"Add"
+									],
+									"query": [
+										{
+											"key": "idEpisodio",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "AddQuestionario",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"idQuestionario\": 2022041805334177754,\n    \"sequenciaQuestionario\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:5001/OSLER/Episodio/1/Questionario/Add?idEpisodio=1",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"OSLER",
+												"Episodio",
+												"1",
+												"Questionario",
+												"Add"
+											],
+											"query": [
+												{
+													"key": "idEpisodio",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 18 Apr 2022 11:17:10 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"idEpisodioQuestionario\": 2022041812171132184,\n    \"questionario\": {\n        \"idQuestionario\": 2022041805334177754,\n        \"descricao\": \"412\",\n        \"idiomaQuestionario\": {\n            \"idIdioma\": 1,\n            \"descricao\": \"Português\",\n            \"defaultId\": 1,\n            \"defaultDescricao\": \"Português\",\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n            \"modificadoPor\": null\n        },\n        \"isPersistent\": true,\n        \"isLoading\": false,\n        \"criadoEm\": \"2022-04-18T05:33:41.848893\",\n        \"criadoPor\": null,\n        \"modificadoEm\": \"2022-04-18T05:33:41.890635\",\n        \"modificadoPor\": null\n    },\n    \"episodio\": {\n        \"idEpisodio\": 1,\n        \"descricao\": \"descricao ep 1\",\n        \"idSns\": \"123456\",\n        \"estado\": 1,\n        \"dataAberto\": \"2022-04-18T01:46:37.292302\",\n        \"dataFechado\": \"2022-04-18T01:50:16.04572\",\n        \"idioma\": {\n            \"idIdioma\": 1,\n            \"descricao\": \"Português\",\n            \"defaultId\": 1,\n            \"defaultDescricao\": \"Português\",\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n            \"modificadoPor\": null\n        },\n        \"nacionalidade\": {\n            \"idNacionalidade\": 1,\n            \"descricao\": \"nacionalidade 1\",\n            \"idiomaNacionalidade\": {\n                \"idIdioma\": 1,\n                \"descricao\": \"Português\",\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"Português\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                \"modificadoPor\": null\n            },\n            \"defaultId\": 1,\n            \"defaultDescricao\": \"portuguesa\",\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:38:42.353207\",\n            \"criadoPor\": {\n                \"idUtilizador\": 2,\n                \"ativo\": true,\n                \"nome\": \"sysadmin\",\n                \"password\": \"sysadmin\",\n                \"nivelAcesso\": 5,\n                \"idioma\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                \"modificadoPor\": null\n            },\n            \"modificadoEm\": \"2022-04-18T12:17:11.596935+01:00\",\n            \"modificadoPor\": {\n                \"idUtilizador\": 2,\n                \"ativo\": true,\n                \"nome\": \"sysadmin\",\n                \"password\": \"sysadmin\",\n                \"nivelAcesso\": 5,\n                \"idioma\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                \"modificadoPor\": null\n            }\n        },\n        \"corTriagem\": {\n            \"idCorTriagem\": 1,\n            \"descricao\": \"cor 1\",\n            \"codigoCorHex\": \"123\",\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:37:44.866404\",\n            \"criadoPor\": {\n                \"idUtilizador\": 2,\n                \"ativo\": true,\n                \"nome\": \"sysadmin\",\n                \"password\": \"sysadmin\",\n                \"nivelAcesso\": 5,\n                \"idioma\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                \"modificadoPor\": null\n            },\n            \"modificadoEm\": \"2022-04-18T12:17:11.581717+01:00\",\n            \"modificadoPor\": {\n                \"idUtilizador\": 2,\n                \"ativo\": true,\n                \"nome\": \"sysadmin\",\n                \"password\": \"sysadmin\",\n                \"nivelAcesso\": 5,\n                \"idioma\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                \"modificadoPor\": null\n            }\n        },\n        \"dataNascimento\": \"2022-04-18T00:00:00\",\n        \"pin4\": 2022,\n        \"estadoTxt\": \"crit\",\n        \"codEpisodio\": \"1\",\n        \"isPersistent\": true,\n        \"isLoading\": false,\n        \"criadoEm\": \"2022-04-18T01:46:37.292302\",\n        \"criadoPor\": {\n            \"idUtilizador\": 2,\n            \"ativo\": true,\n            \"nome\": \"sysadmin\",\n            \"password\": \"sysadmin\",\n            \"nivelAcesso\": 5,\n            \"idioma\": {\n                \"idIdioma\": 1,\n                \"descricao\": \"Português\",\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"Português\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                \"modificadoPor\": null\n            },\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n            \"modificadoPor\": null\n        },\n        \"modificadoEm\": \"2022-04-18T12:17:11.599587+01:00\",\n        \"modificadoPor\": null\n    },\n    \"sequenciaQuestionario\": 1,\n    \"isPersistent\": true,\n    \"isLoading\": false,\n    \"criadoEm\": \"2022-04-18T12:17:11.608178+01:00\",\n    \"criadoPor\": null,\n    \"modificadoEm\": \"2022-04-18T12:17:11.638162+01:00\",\n    \"modificadoPor\": null\n}"
+								}
+							]
+						},
+						{
+							"name": "Obter lista questionario episodio",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/Episodio/{{idEpisodio}}/Questionario/List",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Episodio",
+										"{{idEpisodio}}",
+										"Questionario",
+										"List"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Obter lista questionario episodio",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/OSLER/Episodio/{{idEpisodio}}/Questionario/List",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"OSLER",
+												"Episodio",
+												"{{idEpisodio}}",
+												"Questionario",
+												"List"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 18 Apr 2022 11:37:43 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain; charset=utf-8"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "[{\"idEpisodio\":1,\"idQuestionario\":2022041805334177754,\"sequenciaQuestionario\":1}]"
+								}
+							]
+						},
+						{
+							"name": "Remover Questionarios",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    2022041805044277386, 2022041805334177754\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/Episodio/{{idEpisodio}}/Questionario",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Episodio",
+										"{{idEpisodio}}",
+										"Questionario"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Remover Questionarios",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n    2022041805044277386, 2022041805334177754\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseurl}}/Episodio/{{idEpisodio}}/Questionario",
+											"host": [
+												"{{baseurl}}"
+											],
+											"path": [
+												"Episodio",
+												"{{idEpisodio}}",
+												"Questionario"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 18 Apr 2022 13:25:54 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain; charset=utf-8"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "[{\"idEpisodio\":1,\"idQuestionario\":2022041812395077096,\"sequenciaQuestionario\":4},{\"idEpisodio\":1,\"idQuestionario\":2022041805305406128,\"sequenciaQuestionario\":2}]"
+								}
+							]
+						},
+						{
+							"name": "Adicionar Resposta",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"idEpisodioQuestionario\": 2022041814252647584,\n  \"sequenciaResposta\": 0,\n  \"idQuestionario\": 2022041812395077096,\n  \"idPergunta\": 2022041817033008616,\n  \"resposta\": \"resposta interessante\",\n  \"ativo\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/Episodio/{{idEpisodio}}/Questionario/Responder",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Episodio",
+										"{{idEpisodio}}",
+										"Questionario",
+										"Responder"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Adicionar Resposta",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"idEpisodioQuestionario\": 2022041814252647584,\n  \"sequenciaResposta\": 0,\n  \"idQuestionario\": 2022041812395077096,\n  \"idPergunta\": 2022041817033008616,\n  \"resposta\": \"resposta interessante\",\n  \"ativo\": true\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseurl}}/Episodio/{{idEpisodio}}/Questionario/Responder",
+											"host": [
+												"{{baseurl}}"
+											],
+											"path": [
+												"Episodio",
+												"{{idEpisodio}}",
+												"Questionario",
+												"Responder"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 18 Apr 2022 16:54:40 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"episodioQuestionario\": {\n        \"idEpisodioQuestionario\": 2022041814252647584,\n        \"questionario\": {\n            \"idQuestionario\": 2022041812395077096,\n            \"descricao\": \"312\",\n            \"idiomaQuestionario\": {\n                \"idIdioma\": 1,\n                \"descricao\": \"Português\",\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"Português\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                \"modificadoPor\": null\n            },\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T12:39:50.328838\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T12:39:50.379504\",\n            \"modificadoPor\": null\n        },\n        \"episodio\": {\n            \"idEpisodio\": 1,\n            \"descricao\": \"descricao ep 1\",\n            \"idSns\": \"123456\",\n            \"estado\": 1,\n            \"dataAberto\": \"2022-04-18T01:46:37.292302\",\n            \"dataFechado\": \"2022-04-18T01:50:16.04572\",\n            \"idioma\": {\n                \"idIdioma\": 1,\n                \"descricao\": \"Português\",\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"Português\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                \"modificadoPor\": null\n            },\n            \"nacionalidade\": {\n                \"idNacionalidade\": 1,\n                \"descricao\": \"nacionalidade 1\",\n                \"idiomaNacionalidade\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"portuguesa\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:38:42.353207\",\n                \"criadoPor\": {\n                    \"idUtilizador\": 2,\n                    \"ativo\": true,\n                    \"nome\": \"sysadmin\",\n                    \"password\": \"sysadmin\",\n                    \"nivelAcesso\": 5,\n                    \"idioma\": {\n                        \"idIdioma\": 1,\n                        \"descricao\": \"Português\",\n                        \"defaultId\": 1,\n                        \"defaultDescricao\": \"Português\",\n                        \"isPersistent\": true,\n                        \"isLoading\": false,\n                        \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                        \"criadoPor\": null,\n                        \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                        \"modificadoPor\": null\n                    },\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                    \"modificadoPor\": null\n                },\n                \"modificadoEm\": \"2022-04-18T17:54:40.349735+01:00\",\n                \"modificadoPor\": {\n                    \"idUtilizador\": 2,\n                    \"ativo\": true,\n                    \"nome\": \"sysadmin\",\n                    \"password\": \"sysadmin\",\n                    \"nivelAcesso\": 5,\n                    \"idioma\": {\n                        \"idIdioma\": 1,\n                        \"descricao\": \"Português\",\n                        \"defaultId\": 1,\n                        \"defaultDescricao\": \"Português\",\n                        \"isPersistent\": true,\n                        \"isLoading\": false,\n                        \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                        \"criadoPor\": null,\n                        \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                        \"modificadoPor\": null\n                    },\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                    \"modificadoPor\": null\n                }\n            },\n            \"corTriagem\": {\n                \"idCorTriagem\": 1,\n                \"descricao\": \"cor 1\",\n                \"codigoCorHex\": \"123\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:37:44.866404\",\n                \"criadoPor\": {\n                    \"idUtilizador\": 2,\n                    \"ativo\": true,\n                    \"nome\": \"sysadmin\",\n                    \"password\": \"sysadmin\",\n                    \"nivelAcesso\": 5,\n                    \"idioma\": {\n                        \"idIdioma\": 1,\n                        \"descricao\": \"Português\",\n                        \"defaultId\": 1,\n                        \"defaultDescricao\": \"Português\",\n                        \"isPersistent\": true,\n                        \"isLoading\": false,\n                        \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                        \"criadoPor\": null,\n                        \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                        \"modificadoPor\": null\n                    },\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                    \"modificadoPor\": null\n                },\n                \"modificadoEm\": \"2022-04-18T17:54:40.337342+01:00\",\n                \"modificadoPor\": {\n                    \"idUtilizador\": 2,\n                    \"ativo\": true,\n                    \"nome\": \"sysadmin\",\n                    \"password\": \"sysadmin\",\n                    \"nivelAcesso\": 5,\n                    \"idioma\": {\n                        \"idIdioma\": 1,\n                        \"descricao\": \"Português\",\n                        \"defaultId\": 1,\n                        \"defaultDescricao\": \"Português\",\n                        \"isPersistent\": true,\n                        \"isLoading\": false,\n                        \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                        \"criadoPor\": null,\n                        \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                        \"modificadoPor\": null\n                    },\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                    \"modificadoPor\": null\n                }\n            },\n            \"dataNascimento\": \"2022-04-18T00:00:00\",\n            \"pin4\": 2022,\n            \"estadoTxt\": \"crit\",\n            \"codEpisodio\": \"1\",\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:46:37.292302\",\n            \"criadoPor\": {\n                \"idUtilizador\": 2,\n                \"ativo\": true,\n                \"nome\": \"sysadmin\",\n                \"password\": \"sysadmin\",\n                \"nivelAcesso\": 5,\n                \"idioma\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                \"modificadoPor\": null\n            },\n            \"modificadoEm\": \"2022-04-18T17:54:40.352358+01:00\",\n            \"modificadoPor\": null\n        },\n        \"sequenciaQuestionario\": 4,\n        \"isPersistent\": true,\n        \"isLoading\": false,\n        \"criadoEm\": \"2022-04-18T14:25:26.870716\",\n        \"criadoPor\": null,\n        \"modificadoEm\": \"2022-04-18T14:25:26.934366\",\n        \"modificadoPor\": null\n    },\n    \"sequenciaResposta\": 0,\n    \"questionario\": {\n        \"idQuestionario\": 2022041812395077096,\n        \"descricao\": \"312\",\n        \"idiomaQuestionario\": {\n            \"idIdioma\": 1,\n            \"descricao\": \"Português\",\n            \"defaultId\": 1,\n            \"defaultDescricao\": \"Português\",\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n            \"modificadoPor\": null\n        },\n        \"isPersistent\": true,\n        \"isLoading\": false,\n        \"criadoEm\": \"2022-04-18T12:39:50.328838\",\n        \"criadoPor\": null,\n        \"modificadoEm\": \"2022-04-18T12:39:50.379504\",\n        \"modificadoPor\": null\n    },\n    \"pergunta\": {\n        \"idPergunta\": 2022041817033008616,\n        \"textoPergunta\": \"Quantos queres?\",\n        \"questionario\": {\n            \"idQuestionario\": 2022041805144448652,\n            \"descricao\": \"2\",\n            \"idiomaQuestionario\": {\n                \"idIdioma\": 1,\n                \"descricao\": \"Português\",\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"Português\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                \"modificadoPor\": null\n            },\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T05:14:44.306689\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T05:14:44.405745\",\n            \"modificadoPor\": null\n        },\n        \"sequenciaPergunta\": 1,\n        \"isPersistent\": true,\n        \"isLoading\": false,\n        \"criadoEm\": \"2022-04-18T17:03:30.754919\",\n        \"criadoPor\": null,\n        \"modificadoEm\": \"2022-04-18T17:03:30.852861\",\n        \"modificadoPor\": null\n    },\n    \"resposta\": \"resposta interessante\",\n    \"ativo\": true,\n    \"isPersistent\": true,\n    \"isLoading\": false,\n    \"criadoEm\": \"2022-04-18T17:54:40.363315+01:00\",\n    \"criadoPor\": null,\n    \"modificadoEm\": \"2022-04-18T17:54:40.36567+01:00\",\n    \"modificadoPor\": null\n}"
+								}
+							]
+						},
+						{
+							"name": "Obter Respostas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/Episodio/{{idEpisodio}}/Respostas",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Episodio",
+										"{{idEpisodio}}",
+										"Respostas"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Obter Respostas",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseurl}}/Episodio/{{idEpisodio}}/Respostas",
+											"host": [
+												"{{baseurl}}"
+											],
+											"path": [
+												"Episodio",
+												"{{idEpisodio}}",
+												"Respostas"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 25 Apr 2022 19:25:58 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"idEpisodioQuestionario\": 2022041814252647584,\n        \"pergunta\": \"Quantos queres?\",\n        \"resposta\": \"resposta interessante\",\n        \"enviadoPor\": 1\n    }\n]"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Dados",
+					"item": [
+						{
+							"name": "Obter Dados",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/Episodio/{{idEpisodio}}/Dados",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Episodio",
+										"{{idEpisodio}}",
+										"Dados"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Obter Dados",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/OSLER/Episodio/{{idEpisodio}}/Dados",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"OSLER",
+												"Episodio",
+												"{{idEpisodio}}",
+												"Dados"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 18 Apr 2022 11:22:20 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain; charset=utf-8"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "[{\"idEpisodio\":1,\"idTipoLeitura\":2,\"valor\":\"30\",\"dataHora\":\"2022-04-18T03:48:33.613138\"},{\"idEpisodio\":1,\"idTipoLeitura\":2,\"valor\":\"1\",\"dataHora\":\"2022-04-18T03:48:14.764998\"},{\"idEpisodio\":1,\"idTipoLeitura\":1,\"valor\":\"2\",\"dataHora\":\"2022-04-18T02:45:05.405484\"}]"
+								}
+							]
+						},
+						{
+							"name": "Enviar Dado",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/Episodio/{{idEpisodio}}/Dados?idTipoDado=1&valor=50",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Episodio",
+										"{{idEpisodio}}",
+										"Dados"
+									],
+									"query": [
+										{
+											"key": "idTipoDado",
+											"value": "1"
+										},
+										{
+											"key": "valor",
+											"value": "50"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Enviar Dado",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/OSLER/Episodio/{{idEpisodio}}/Dados?idTipoDado=1&valor=50",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"OSLER",
+												"Episodio",
+												"{{idEpisodio}}",
+												"Dados"
+											],
+											"query": [
+												{
+													"key": "idTipoDado",
+													"value": "1"
+												},
+												{
+													"key": "valor",
+													"value": "50"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 18 Apr 2022 11:23:03 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"idEpisodioRegistoDados\": 2022041812230382919,\n    \"tipoLeitura\": {\n        \"idTipoLeitura\": 1,\n        \"descricao\": \"decr 1\",\n        \"medida\": \"medida1\",\n        \"isPersistent\": true,\n        \"isLoading\": false,\n        \"criadoEm\": \"2022-04-18T02:44:16.741011\",\n        \"criadoPor\": {\n            \"idUtilizador\": 2,\n            \"ativo\": true,\n            \"nome\": \"sysadmin\",\n            \"password\": \"sysadmin\",\n            \"nivelAcesso\": 5,\n            \"idioma\": {\n                \"idIdioma\": 1,\n                \"descricao\": \"Português\",\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"Português\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                \"modificadoPor\": null\n            },\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n            \"modificadoPor\": null\n        },\n        \"modificadoEm\": \"2022-04-18T12:23:03.782155+01:00\",\n        \"modificadoPor\": {\n            \"idUtilizador\": 2,\n            \"ativo\": true,\n            \"nome\": \"sysadmin\",\n            \"password\": \"sysadmin\",\n            \"nivelAcesso\": 5,\n            \"idioma\": {\n                \"idIdioma\": 1,\n                \"descricao\": \"Português\",\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"Português\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                \"modificadoPor\": null\n            },\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n            \"modificadoPor\": null\n        }\n    },\n    \"episodio\": {\n        \"idEpisodio\": 1,\n        \"descricao\": \"descricao ep 1\",\n        \"idSns\": \"123456\",\n        \"estado\": 1,\n        \"dataAberto\": \"2022-04-18T01:46:37.292302\",\n        \"dataFechado\": \"2022-04-18T01:50:16.04572\",\n        \"idioma\": {\n            \"idIdioma\": 1,\n            \"descricao\": \"Português\",\n            \"defaultId\": 1,\n            \"defaultDescricao\": \"Português\",\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n            \"modificadoPor\": null\n        },\n        \"nacionalidade\": {\n            \"idNacionalidade\": 1,\n            \"descricao\": \"nacionalidade 1\",\n            \"idiomaNacionalidade\": {\n                \"idIdioma\": 1,\n                \"descricao\": \"Português\",\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"Português\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                \"modificadoPor\": null\n            },\n            \"defaultId\": 1,\n            \"defaultDescricao\": \"portuguesa\",\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:38:42.353207\",\n            \"criadoPor\": {\n                \"idUtilizador\": 2,\n                \"ativo\": true,\n                \"nome\": \"sysadmin\",\n                \"password\": \"sysadmin\",\n                \"nivelAcesso\": 5,\n                \"idioma\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                \"modificadoPor\": null\n            },\n            \"modificadoEm\": \"2022-04-18T12:23:03.776543+01:00\",\n            \"modificadoPor\": {\n                \"idUtilizador\": 2,\n                \"ativo\": true,\n                \"nome\": \"sysadmin\",\n                \"password\": \"sysadmin\",\n                \"nivelAcesso\": 5,\n                \"idioma\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                \"modificadoPor\": null\n            }\n        },\n        \"corTriagem\": {\n            \"idCorTriagem\": 1,\n            \"descricao\": \"cor 1\",\n            \"codigoCorHex\": \"123\",\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:37:44.866404\",\n            \"criadoPor\": {\n                \"idUtilizador\": 2,\n                \"ativo\": true,\n                \"nome\": \"sysadmin\",\n                \"password\": \"sysadmin\",\n                \"nivelAcesso\": 5,\n                \"idioma\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                \"modificadoPor\": null\n            },\n            \"modificadoEm\": \"2022-04-18T12:23:03.775497+01:00\",\n            \"modificadoPor\": {\n                \"idUtilizador\": 2,\n                \"ativo\": true,\n                \"nome\": \"sysadmin\",\n                \"password\": \"sysadmin\",\n                \"nivelAcesso\": 5,\n                \"idioma\": {\n                    \"idIdioma\": 1,\n                    \"descricao\": \"Português\",\n                    \"defaultId\": 1,\n                    \"defaultDescricao\": \"Português\",\n                    \"isPersistent\": true,\n                    \"isLoading\": false,\n                    \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                    \"criadoPor\": null,\n                    \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                    \"modificadoPor\": null\n                },\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n                \"modificadoPor\": null\n            }\n        },\n        \"dataNascimento\": \"2022-04-18T00:00:00\",\n        \"pin4\": 2022,\n        \"estadoTxt\": \"crit\",\n        \"codEpisodio\": \"1\",\n        \"isPersistent\": true,\n        \"isLoading\": false,\n        \"criadoEm\": \"2022-04-18T01:46:37.292302\",\n        \"criadoPor\": {\n            \"idUtilizador\": 2,\n            \"ativo\": true,\n            \"nome\": \"sysadmin\",\n            \"password\": \"sysadmin\",\n            \"nivelAcesso\": 5,\n            \"idioma\": {\n                \"idIdioma\": 1,\n                \"descricao\": \"Português\",\n                \"defaultId\": 1,\n                \"defaultDescricao\": \"Português\",\n                \"isPersistent\": true,\n                \"isLoading\": false,\n                \"criadoEm\": \"2022-04-18T01:36:31.947038\",\n                \"criadoPor\": null,\n                \"modificadoEm\": \"2022-04-18T01:36:31.947114\",\n                \"modificadoPor\": null\n            },\n            \"isPersistent\": true,\n            \"isLoading\": false,\n            \"criadoEm\": \"2022-04-18T01:36:31.979093\",\n            \"criadoPor\": null,\n            \"modificadoEm\": \"2022-04-18T01:36:31.979096\",\n            \"modificadoPor\": null\n        },\n        \"modificadoEm\": \"2022-04-18T12:23:03.777443+01:00\",\n        \"modificadoPor\": null\n    },\n    \"dataHora\": \"2022-04-18T12:23:03.782616+01:00\",\n    \"valor\": \"50\",\n    \"isPersistent\": true,\n    \"isLoading\": false,\n    \"criadoEm\": \"2022-04-18T12:23:03.783193+01:00\",\n    \"criadoPor\": null,\n    \"modificadoEm\": \"2022-04-18T12:23:03.833155+01:00\",\n    \"modificadoPor\": null\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Adicionar Informação",
+			"item": [
+				{
+					"name": "Questionario",
+					"item": [
+						{
+							"name": "Adicionar Questionario",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"descricao\": \"5\",\n  \"idIdioma\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/Sysadmin/Questionario/Novo",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Sysadmin",
+										"Questionario",
+										"Novo"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Adicionar Questionario",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"descricao\": \"5\",\n  \"idIdioma\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:5001/OSLER/Sysadmin/Questionario/Novo",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"OSLER",
+												"Sysadmin",
+												"Questionario",
+												"Novo"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 18 Apr 2022 11:40:11 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain; charset=utf-8"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\"IdQuestionario\":2022041805305406128,\"Descricao\":\"5\",\"IdiomaQuestionario\":{\"IdIdioma\":1,\"Descricao\":\"Português\",\"DefaultId\":1,\"DefaultDescricao\":\"Português\",\"IsPersistent\":true,\"IsLoading\":false,\"CriadoEm\":\"2022-04-18T01:36:31.947038\",\"CriadoPor\":null,\"ModificadoEm\":\"2022-04-18T01:36:31.947114\",\"ModificadoPor\":null},\"IsPersistent\":true,\"IsLoading\":false,\"CriadoEm\":\"2022-04-18T05:30:54.345672\",\"CriadoPor\":null,\"ModificadoEm\":\"2022-04-18T05:30:54.402559\",\"ModificadoPor\":null}"
+								}
+							]
+						},
+						{
+							"name": "Adicionar Pergunta",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"idQuestionario\", \"1\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"textoPergunta\": \"Tudo bem?\",\n  \"sequenciaPergunta\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/Questionario/{{idQuestionario}}/Novo",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Questionario",
+										"{{idQuestionario}}",
+										"Novo"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Adicionar Local",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"descricao\": \"local 6\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/Sysadmin/Local/Novo",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Sysadmin",
+								"Local",
+								"Novo"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Adicionar Local",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"descricao\": \"local 6\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:5001/OSLER/Sysadmin/Local/Novo",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"OSLER",
+										"Sysadmin",
+										"Local",
+										"Novo"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Apr 2022 11:41:31 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "\"{\\\"id\\\":2022041812413217481,\\\"texto\\\":\\\"local 6\\\"}\""
+						}
+					]
+				},
+				{
+					"name": "Adicionar Pergunta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"textoPergunta\": \"Quantos queres?\",\n  \"idQuestionario\": 2022041805144448652,\n  \"sequenciaPergunta\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/Pergunta/Novo",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Pergunta",
+								"Novo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

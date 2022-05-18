@@ -1,0 +1,21 @@
+	<--------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+	receçao faz entrada(identificaçao)
+	
+	vai a triagem (avaliaçao, responde a questoes-> atribui uma prioridade)
+	
+	sistema recolhe mais dados(questionarios, registo de valores, moneterizaçao do doente pelo acompanhante)
+	
+	consulta(medico alem das perguntas normais, tem acesso aos dados que o doente introduziu)
+	
+	
+	
+	<--------------------------------------------------------------------------------------------------------------------------------------------------->
+	features
+	
+	o utente(acompanhante/enfermeiro) fornece informaçao util para a consulta(entre a triagem e a consulta com o medico)
+	
+	o acompanhante tem acesso à localizaçao (sala de espera ou serviço) do doente 
+	
+	

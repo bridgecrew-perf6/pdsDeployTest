@@ -1,0 +1,10 @@
+reuniao
+
+
+
+elaborar uma lista de aspetos a melhorar, bugs conhecidos, retirar todos os warnings do compilador
+
+postman workflow
+
+atualizar a lista os endpoints
+

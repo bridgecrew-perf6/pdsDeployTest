@@ -1,0 +1,276 @@
+controllers:
+	Episodio
+	Idioma
+	Login done
+	SysadminCorTriagem done
+	SysadminItemFluxoManchester done
+	SysadminLocal 
+	SysadminNacionalidade
+	SysadminQuestionario
+	SysadminTipoLeitura
+	SysadminUtilizador
+	
+/OSLER/Login
+(Post)
+	input: { "user": "sysadmintest", "password": "sysadmintest" }
+	output: { "token": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJzeXNhZG1pbiIsImV4cCI6MTY1Mjg1NzE2NiwiaXNzIjoic3lzYWRtaW4iLCJhdWQiOiJzeXNhZG1pbiJ9.jd0F4gPKlhkiPSK738rT5OJSRtfgCD5ZOIXiEI9Nftk" }
+	Valor esperado, tudo em conformidade
+(Post)
+/OSLER/Login/Utente
+	input: { "codEpisodio": "EP00112233", "pin4": 2022 }
+	output: { "token": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1dGVudGUiLCJleHAiOjE2NTI4NTc4NDgsImlzcyI6InN5c2FkbWluIiwiYXVkIjoidXRlbnRlIn0._hea0wElGmlEXbhtq1m0iRYc2XsWMPBt97QIS4YYwMA" }
+	Valor esperado, tudo em conformidade
+(Post)
+/OSLER/Login/Acompanhante
+	input: { "codEpisodio": "EP00112233", "pin4": 2022 }
+	output: {"token": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhY29tcGFuaGFudGUiLCJleHAiOjE2NTI4NTc5ODcsImlzcyI6InN5c2FkbWluIiwiYXVkIjoiYWNvbXBhbmhhbnRlIn0.YmW9yfMf7rQ0DVcUHkSFbPod58tajdtWypHWqw8zr18"}
+	Valor esperado, tudo em conformidade
+(Get)
+/OSLER/Login/testeadmin
+	Estando logado com o user { "user": "sysadmintest", "password": "sysadmintest" },que corrspondeu ao token:
+		eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJzeXNhZG1pbiIsImV4cCI6MTY1MjkxNTM1NiwiaXNzIjoic3lzYWRtaW4iLCJhdWQiOiJzeXNhZG1pbiJ9.bnMjMVi4cJ_axOTVN-V3BCUcZN0dnI73N70fNJ8P5hA
+	input: --/--
+	OutPut: Erro code 500 WebAppOSLERLib.Tools.MyException
+	POSSIVEL ERRO: metodo GetByTokenPayload recebe o payload como parametro, e está a tratar como se recebe-se o token todo
+(Get)
+/OSLER/Login/testeutente
+	Estando logado com o user { "codEpisodio": "EP00112233", "pin4": 2022 }
+	Visto que sao funçoes semelhantes deve ocurrer o mesmo erro da anterior
+(Get)
+/OSLER/CorTriagem/Lista
+	input: --/--
+	output:[
+			  {
+				"id": 1,
+				"texto": "DOENTE EMERGENTE",
+				"cor": "#e2112e"
+			  },
+			  {
+				"id": 2,
+				"texto": "DOENTE MUITO URGENTE",
+				"cor": "#f39433"
+			  },
+			  {
+				"id": 5,
+				"texto": "DOENTE NÃO URGENTE",
+				"cor": "#3d99d5"
+			  },
+			  {
+				"id": 4,
+				"texto": "DOENTE POUCO URGENTE",
+				"cor": "#3eab62"
+			  },
+			  {
+				"id": 3,
+				"texto": "DOENTE URGENTE",
+				"cor": "#f7db35"
+			  }
+			]
+(Get)
+/OSLER/ItemFluxoManchester/Lista
+	input: --/--
+	output:[
+			  {
+				"id": 2022041321372888000,
+				"descricao": "Adulto muito quente",
+				"idclassificacao": 2,
+				"classificacao": "DOENTE MUITO URGENTE",
+				"cor": "#f39433"
+			  },
+			  {
+				"id": 2022041321372861700,
+				"descricao": "Adulto quente",
+				"idclassificacao": 3,
+				"classificacao": "DOENTE URGENTE",
+				"cor": "#f7db35"
+			  },
+			  {
+				"id": 2022041321372827400,
+				"descricao": "Alteração do estado de consciência de novo",
+				"idclassificacao": 2,
+				"classificacao": "DOENTE MUITO URGENTE",
+				"cor": "#f39433"
+			  },
+			  {
+				"id": 2022041321372785700,
+				"descricao": "Choque",
+				"idclassificacao": 1,
+				"classificacao": "DOENTE EMERGENTE",
+				"cor": "#e2112e"
+			  },
+			  {
+				"id": 2022041321372125000,
+				"descricao": "Compromisso da via aérea",
+				"idclassificacao": 1,
+				"classificacao": "DOENTE EMERGENTE",
+				"cor": "#e2112e"
+			  },
+			  {
+				"id": 2022041321372826600,
+				"descricao": "Convulsão atual",
+				"idclassificacao": 1,
+				"classificacao": "DOENTE EMERGENTE",
+				"cor": "#e2112e"
+			  },
+			  {
+				"id": 2022041321372827600,
+				"descricao": "Criança muito quente",
+				"idclassificacao": 2,
+				"classificacao": "DOENTE MUITO URGENTE",
+				"cor": "#f39433"
+			  },
+			  {
+				"id": 2022041321372826000,
+				"descricao": "Criança que não responde",
+				"idclassificacao": 1,
+				"classificacao": "DOENTE EMERGENTE",
+				"cor": "#e2112e"
+			  },
+			  {
+				"id": 2022041321372851200,
+				"descricao": "Criança quente",
+				"idclassificacao": 3,
+				"classificacao": "DOENTE URGENTE",
+				"cor": "#f7db35"
+			  },
+			  {
+				"id": 2022041321372923100,
+				"descricao": "Dor ligeira <7 dias",
+				"idclassificacao": 4,
+				"classificacao": "DOENTE POUCO URGENTE",
+				"cor": "#3eab62"
+			  },
+			  {
+				"id": 2022041321372922000,
+				"descricao": "Dor moderada",
+				"idclassificacao": 3,
+				"classificacao": "DOENTE URGENTE",
+				"cor": "#f7db35"
+			  },
+			  {
+				"id": 2022041321372828700,
+				"descricao": "Dor severa",
+				"idclassificacao": 2,
+				"classificacao": "DOENTE MUITO URGENTE",
+				"cor": "#f39433"
+			  },
+			  {
+				"id": 2022041321372827000,
+				"descricao": "Grande hemorragia incontrolável",
+				"idclassificacao": 2,
+				"classificacao": "DOENTE MUITO URGENTE",
+				"cor": "#f39433"
+			  },
+			  {
+				"id": 2022041321372829200,
+				"descricao": "História inapropriada",
+				"idclassificacao": 3,
+				"classificacao": "DOENTE URGENTE",
+				"cor": "#f7db35"
+			  },
+			  {
+				"id": 2022041321372829000,
+				"descricao": "Pequena hemorragia incontrolável",
+				"idclassificacao": 3,
+				"classificacao": "DOENTE URGENTE",
+				"cor": "#f7db35"
+			  },
+			  {
+				"id": 2022041321372923600,
+				"descricao": "Problema recente",
+				"idclassificacao": 4,
+				"classificacao": "DOENTE POUCO URGENTE",
+				"cor": "#3eab62"
+			  },
+			  {
+				"id": 2022041321372725200,
+				"descricao": "Respiração ineficaz",
+				"idclassificacao": 1,
+				"classificacao": "DOENTE EMERGENTE",
+				"cor": "#e2112e"
+			  },
+			  {
+				"id": 2022041321372922400,
+				"descricao": "Subfebril (Febrícula)",
+				"idclassificacao": 4,
+				"classificacao": "DOENTE POUCO URGENTE",
+				"cor": "#3eab62"
+			  },
+			  {
+				"id": 2022041321372923000,
+				"descricao": "Vómitos",
+				"idclassificacao": 4,
+				"classificacao": "DOENTE POUCO URGENTE",
+				"cor": "#3eab62"
+			  },
+			  {
+				"id": 2022041321372829700,
+				"descricao": "Vómitos persistentes",
+				"idclassificacao": 3,
+				"classificacao": "DOENTE URGENTE",
+				"cor": "#f7db35"
+			  }
+			]
+(Get)
+/OSLER/ItemFluxoManchester/{id}
+	input: id = 1
+	output: "o 1 não existe!"
+	Resultado esperado visto que nao existe nenhum item de fuxo de manschester com id 1.
+	input: id = 2022041321372785760
+	output:{
+			  "id": 2022041321372785700,
+			  "descricao": "Choque",
+			  "idclassificacao": 1,
+			  "classificacao": "DOENTE EMERGENTE",
+			  "cor": "#e2112e"
+			}
+		O conteudo está adulterádo pelo swagger. é um erro conhecido em que a ferramenta altera as variaveis do tipo "ulong".
+		Fora o erro conhecido mencionado e que só acontece nesta ferramenta tudo em conformidade.
+(Post)
+/OSLER/ItemFluxoManchester/{id}
+	input: id= 2022041321372785760
+			{
+			  "descricao": "Dorzinha",
+			  "idClassificacao": 1
+			}
+	output: {
+			  "id": 2022041321372785700,
+			  "descricao": "Dorzinha",
+			  "idclassificacao": 1,
+			  "classificacao": "DOENTE EMERGENTE",
+			  "cor": "#e2112e"
+			}
+			Resultado conforme o esperado. É necessario que este endpoint verifique se os ids de classificaçao fornecidos sao validos.
+(Post)
+/OSLER/ItemFluxoManchester/Novo
+	input:{
+			  "descricao": "dorzinha muito forte",
+			  "idClassificacao": 5
+			}
+	output: {
+			  "id": 2022051817083009800,
+			  "descricao": "dorzinha muito forte",
+			  "idclassificacao": 5,
+			  "classificacao": "DOENTE NÃO URGENTE",
+			  "cor": "#3d99d5"
+			}
+			Resultado conforme o esperado.
+(Get)
+/OSLER/Local/{id}
+	input: id=1
+	output: {
+			  "id": 1,
+			  "texto": "Sala de espera"
+			}
+	Resultado conforme o esperado.
+(Post)
+/OSLER/Local/{id}
+	input: id=1
+		{
+		  "descricao": "Sala de espera de fora"
+		}
+	output:{
+			  "id": 1,
+			  "texto": "Sala de espera de fora"
+			}
+(Post)

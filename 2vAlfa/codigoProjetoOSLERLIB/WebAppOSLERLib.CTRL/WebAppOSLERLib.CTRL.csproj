@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Npgsql" Version="6.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="ILoadSaveData.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\WebAppOSLERLib.DAL\WebAppOSLERLib.DAL.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,6 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005Cdev_005Clesi_005Cdevops_005CPROJ_002DPDS_002DPW_005Cpds_005C2vAlfa_005CcodigoProjetoOSLERLIB_005CWebAppOSLERLib_002ECTRL_005Cbin_005CDebug_005Cnet5_002E0_005CWebAppOSLERLib_002ECTRL_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005Cdev_005Clesi_005Cdevops_005CPROJ_002DPDS_002DPW_005Cpds_005C2vAlfa_005CcodigoProjetoOSLERLIB_005CWebAppOSLERLib_002Esln/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;
+  &lt;Assembly Path="/Users/Aulas/Documents/IPCA/2ºAno/2º Semestre/Projecto Desenvolvimento/PROJ-PDS-PW/pds/2vAlfa/codigoProjetoOSLERLIB/WebAppOSLERLib.CTRL/bin/Debug/net5.0/WebAppOSLERLib.CTRL.dll" /&gt;
+&lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>

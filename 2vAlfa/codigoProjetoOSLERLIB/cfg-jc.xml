@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EstruturaDadosXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <NpgsqlConnection>Server=127.0.0.1;Port=5432;Database=OSLERDB;User Id=postgres;Password=postgres;</NpgsqlConnection>
+  <JWTSecret>Yt2XHakKbIteH+rWmXMqMhXpi6R003Hg7Sn/elziRGhEMeJvZfRjOQ6Dbo+jaA71neQ=</JWTSecret>
+</EstruturaDadosXml>

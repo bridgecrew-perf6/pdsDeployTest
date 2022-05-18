@@ -1,0 +1,10 @@
+.idea/
+.vs/
+bin/
+obj/
+.DS_Store
+*.7z
+*.zip
+*.bak
+*.cuda-proj
+*.sln.DotSettings.user
