@@ -1,8 +1,0 @@
-.idea/
-bin/
-obj/
-.DS_Store
-*.7z
-*.zip
-*.bak
-*.cuda-proj
